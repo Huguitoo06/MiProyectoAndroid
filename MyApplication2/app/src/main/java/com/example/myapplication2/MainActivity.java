@@ -1,5 +1,6 @@
 package com.example.myapplication2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.activity.EdgeToEdge;
@@ -38,5 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.i("Ejemplo", "Estoy on Destroy");
+        Intent ejemplo = new Intent(this,MainActivity2.class);
+        startActivity(ejemplo);
     };
 }

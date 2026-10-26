@@ -1,15 +1,12 @@
 package com.example.calculadora;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 
@@ -22,92 +19,128 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets barras = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(barras.left, barras.top, barras.right, barras.bottom);
-            return insets;
-        });
 
         display = findViewById(R.id.display);
 
-
-        int[] numeros = {R.id.boton0, R.id.boton1, R.id.boton2, R.id.boton3, R.id.boton4, R.id.boton5, R.id.boton6, R.id.boton7, R.id.boton8, R.id.boton9};
+        // Botones numéricos
+        int[] numeros = {
+                R.id.boton0, R.id.boton1, R.id.boton2,
+                R.id.boton3, R.id.boton4, R.id.boton5,
+                R.id.boton6, R.id.boton7, R.id.boton8, R.id.boton9
+        };
 
         for (int id : numeros) {
             Button boton = findViewById(id);
-            boton.setOnClickListener(v -> escribirNumero(boton.getText().toString()));
+
+            boton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    escribirNumero(boton.getText().toString());
+                }
+            });
         }
 
+        // Botones de operaciones
+        ponerOperacion(R.id.sumar, "+");
+        ponerOperacion(R.id.restar, "-");
+        ponerOperacion(R.id.multiplicar, "*");
+        ponerOperacion(R.id.dividir, "/");
 
-        findViewById(R.id.sumar).setOnClickListener(v -> escribirOperacion("+"));
-        findViewById(R.id.restar).setOnClickListener(v -> escribirOperacion("-"));
-        findViewById(R.id.multiplicar).setOnClickListener(v -> escribirOperacion("*"));
-        findViewById(R.id.dividir).setOnClickListener(v -> escribirOperacion("/"));
-
-        // Coma decimal
-        findViewById(R.id.coma).setOnClickListener(v -> escribirComa());
-
-
-        findViewById(R.id.botonC).setOnClickListener(v -> {
-            if (expresion.length() > 1) {
-                expresion = expresion.substring(0, expresion.length() - 1);
-            } else {
-                expresion = "0";
+        // Botón de la coma decimal
+        findViewById(R.id.coma).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                escribirComa();
             }
-            resultadoMostrado = false;
-            actualizarDisplay();
         });
 
+        // Borra el último carácter
+        findViewById(R.id.botonC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expresion = expresion.substring(0, expresion.length() - 1);
 
-        findViewById(R.id.botonAC).setOnClickListener(v -> {
-            expresion = "0";
-            resultadoMostrado = false;
-            actualizarDisplay();
+                if (expresion.isEmpty()) {
+                    expresion = "0";
+                }
+
+                resultadoMostrado = false;
+                actualizarDisplay();
+            }
         });
 
+        // Borra toda la operación
+        findViewById(R.id.botonAC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expresion = "0";
+                resultadoMostrado = false;
+                actualizarDisplay();
+            }
+        });
 
-        findViewById(R.id.igual).setOnClickListener(v -> calcular());
+        // Calcula el resultado
+        findViewById(R.id.igual).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calcular();
+            }
+        });
     }
 
+    // Asigna el funcionamiento a cada botón de operación
+    private void ponerOperacion(int id, String operacion) {
+        findViewById(id).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                escribirOperacion(operacion);
+            }
+        });
+    }
 
+    // Añade un número sin dejar ceros innecesarios al principio
     private void escribirNumero(String numero) {
         if (resultadoMostrado) {
             expresion = "0";
             resultadoMostrado = false;
         }
 
-        if (expresion.equals("0")) {
-            expresion = numero;
+        int inicio = 0;
+
+        for (int i = 0; i < expresion.length(); i++) {
+            char c = expresion.charAt(i);
+
+            if (c == '+' || c == '-' || c == '*' || c == '/') {
+                inicio = i + 1;
+            }
+        }
+
+        String actual = expresion.substring(inicio);
+
+        if (actual.equals("0")) {
+            expresion = expresion.substring(0, inicio) + numero;
         } else {
-            int inicio = expresion.length() - 1;
-
-            while (inicio >= 0 && (Character.isDigit(expresion.charAt(inicio)) || expresion.charAt(inicio) == ',')) {
-                inicio--;
-            }
-
-            String actual = expresion.substring(inicio + 1);
-
-            if (actual.equals("0")) {
-                expresion = expresion.substring(0, inicio + 1) + numero;
-            } else {
-                expresion += numero;
-            }
+            expresion += numero;
         }
 
         actualizarDisplay();
     }
 
-
+    // Añade una operación y quita la coma si está al final
     private void escribirOperacion(String operacion) {
-        if (resultadoMostrado) {
-            resultadoMostrado = false;
-        }
-
         char ultimo = expresion.charAt(expresion.length() - 1);
 
+        // Si termina en coma, la quitamos
+        if (ultimo == ',') {
+            expresion = expresion.substring(0, expresion.length() - 1);
+        }
+
+        resultadoMostrado = false;
+
+        ultimo = expresion.charAt(expresion.length() - 1);
+
+        // Evita tener dos operaciones seguidas
         if (ultimo == '+' || ultimo == '-' || ultimo == '*' || ultimo == '/') {
             expresion = expresion.substring(0, expresion.length() - 1);
         }
@@ -116,53 +149,76 @@ public class MainActivity extends AppCompatActivity {
         actualizarDisplay();
     }
 
-
+    // Añade una coma solo si el número actual no tiene otra
     private void escribirComa() {
-        int inicio = expresion.length() - 1;
-
-        while (inicio >= 0 && (Character.isDigit(expresion.charAt(inicio)) || expresion.charAt(inicio) == ',')) {
-            inicio--;
-        }
-
-        String actual = expresion.substring(inicio + 1);
-
-        if (!actual.contains(",")) {
-            expresion += actual.isEmpty() ? "0," : ",";
+        if (resultadoMostrado) {
+            expresion = "0";
             resultadoMostrado = false;
-            actualizarDisplay();
         }
+
+        int inicio = 0;
+
+        for (int i = 0; i < expresion.length(); i++) {
+            char c = expresion.charAt(i);
+
+            if (c == '+' || c == '-' || c == '*' || c == '/') {
+                inicio = i + 1;
+            }
+        }
+
+        String actual = expresion.substring(inicio);
+
+        // Solo permite la coma si ya hay un número escrito
+        if (!actual.isEmpty() && !actual.contains(",")) {
+            expresion += ",";
+        }
+
+        actualizarDisplay();
     }
 
+    // Separa los números y las operaciones y calcula el resultado
     private void calcular() {
         try {
             String texto = expresion.replace(',', '.');
 
-            if (texto.endsWith("+") || texto.endsWith("-") || texto.endsWith("*") || texto.endsWith("/")) {
+            char ultimo = texto.charAt(texto.length() - 1);
+
+            if (ultimo == '+' || ultimo == '-' || ultimo == '*' || ultimo == '/') {
+                return;
+            }
+
+            // No calcula si la expresión termina en coma
+            if (ultimo == '.') {
                 return;
             }
 
             ArrayList<Double> numeros = new ArrayList<>();
             ArrayList<Character> operaciones = new ArrayList<>();
-            StringBuilder numero = new StringBuilder();
+            String numero = "";
 
             for (int i = 0; i < texto.length(); i++) {
                 char c = texto.charAt(i);
 
                 if (Character.isDigit(c) || c == '.') {
-                    numero.append(c);
+                    numero += c;
                 } else {
-                    if (numero.length() == 0) return;
+                    if (numero.isEmpty() || numero.endsWith(".")) {
+                        return;
+                    }
 
-                    numeros.add(Double.parseDouble(numero.toString()));
-                    numero.setLength(0);
+                    numeros.add(Double.parseDouble(numero));
+                    numero = "";
                     operaciones.add(c);
                 }
             }
 
-            if (numero.length() == 0) return;
-            numeros.add(Double.parseDouble(numero.toString()));
+            if (numero.isEmpty() || numero.endsWith(".")) {
+                return;
+            }
 
+            numeros.add(Double.parseDouble(numero));
 
+            // Primero se hacen las multiplicaciones y divisiones
             for (int i = 0; i < operaciones.size(); i++) {
                 char op = operaciones.get(i);
 
@@ -171,11 +227,18 @@ public class MainActivity extends AppCompatActivity {
                     double b = numeros.get(i + 1);
 
                     if (op == '/' && b == 0) {
-                        Toast.makeText(this, "No se puede dividir entre cero", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "No se puede dividir entre cero",
+                                Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    double resultado = (op == '*') ? a * b : a / b;
+                    double resultado;
+
+                    if (op == '*') {
+                        resultado = a * b;
+                    } else {
+                        resultado = a / b;
+                    }
 
                     numeros.set(i, resultado);
                     numeros.remove(i + 1);
@@ -184,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-
+            // Después se hacen las sumas y restas
             double resultado = numeros.get(0);
 
             for (int i = 0; i < operaciones.size(); i++) {
@@ -195,7 +258,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            if (!Double.isFinite(resultado)) return;
+            if (!Double.isFinite(resultado)) {
+                return;
+            }
 
             if (resultado == (long) resultado) {
                 expresion = String.valueOf((long) resultado);
@@ -207,11 +272,12 @@ public class MainActivity extends AppCompatActivity {
             actualizarDisplay();
 
         } catch (Exception e) {
-            Toast.makeText(this, "Operacion no valida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Operacion no valida",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
-
+    // Muestra los símbolos habituales de una calculadora
     private void actualizarDisplay() {
         display.setText(expresion.replace('*', '×').replace('/', '÷'));
     }

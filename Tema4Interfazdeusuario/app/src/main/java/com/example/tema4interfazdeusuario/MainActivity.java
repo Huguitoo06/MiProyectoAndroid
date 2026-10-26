@@ -1,52 +1,89 @@
+
 package com.example.tema4interfazdeusuario;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+import android.widget.CheckBox;
+import android.widget.RadioGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        // Recogemos los elementos de la pantalla
+        EditText usuario = findViewById(R.id.usuario);
+        EditText contrasena = findViewById(R.id.contrasena);
+        Button boton = findViewById(R.id.entrar);
+        LinearLayout pantalla = findViewById(R.id.pantalla);
+
+        // Aplicamos la animacion a la pantalla
+        pantalla.startAnimation(
+                AnimationUtils.loadAnimation(this, R.anim.animacion));
+
+        // Comprobamos el usuario y la contrasena
+        boton.setOnClickListener(v -> {
+            if (usuario.getText().toString().equals("admin")
+                    && contrasena.getText().toString().equals("1234")) {
+
+                Toast.makeText(this, "Inicio correcto",
+                        Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(this, "Datos incorrectos",
+                        Toast.LENGTH_SHORT).show();
+            }
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+        // Comprobamos si el CheckBox esta marcado
+        CheckBox checkbox = findViewById(R.id.checkbox1);
 
-        TextView miTexto = (TextView) findViewById(R.id.texto);
+        checkbox.setOnCheckedChangeListener((botonCheck, marcado) -> {
+            if (marcado) {
+                Toast.makeText(this, "Opcion marcada",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Opcion desmarcada",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        miTexto.setText("Nuevo texto a mostrar");
+        // Recogemos el grupo de botones de opcion
+        RadioGroup grupo = findViewById(R.id.grupoRadios);
+        Button comprobar = findViewById(R.id.botonComprobar);
+        TextView resultado = findViewById(R.id.textoResultado);
 
-        // Opcion 1 para cambiar el color
-        miTexto.setTextColor(Color.parseColor("#0000FF"));
+        // Comprobamos que opcion ha seleccionado el usuario
+        comprobar.setOnClickListener(v -> {
 
-        // Opcion 2 para cambiar el color
-        miTexto.setTextColor(Color.RED);
+            int idSeleccionado = grupo.getCheckedRadioButtonId();
 
-        // Cambio del texto a cursiva
-        miTexto.setTypeface(null, Typeface.ITALIC);
+            if (idSeleccionado != -1) {
 
-        // Cambio el tamaño del texto
-        miTexto.setTextSize(24);
+                // Buscamos el boton seleccionado
+                RadioButton opcion = findViewById(idSeleccionado);
 
-        // Cambiar tipo de letra
-        miTexto.setTypeface(Typeface.SANS_SERIF);
+                // Guardamos el texto del boton seleccionado
+                String texto = opcion.getText().toString();
+
+                // Mostramos la opcion seleccionada
+                resultado.setText("Has seleccionado: " + texto);
+
+            } else {
+                // Avisamos si no ha seleccionado ninguna opcion
+                resultado.setText(
+                        "No has seleccionado ninguna opcion");
+            }
+        });
     }
 }

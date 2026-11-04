@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Gestion Cuenta Bar</string>
+
+    <string name="titulo">Cuenta del Bar</string>
+    <string name="precio">Precio de la cuenta:</string>
+    <string name="introducir_importe">Introduce el importe</string>
+    <string name="incluir_propina">Incluir propina</string>
+    <string name="propina_inicial">Propina: 10%%</string>
+    <string name="propina_porcentaje">Propina: %1$d%%</string>
+
+    <string name="metodo_pago">Método de pago:</string>
+    <string name="efectivo">Efectivo</string>
+    <string name="tarjeta">Tarjeta</string>
+
+    <string name="calificacion">Calificación del servicio:</string>
+
+    <string name="camarero">Nombre del camarero:</string>
+    <string name="nombre_camarero">Escribe el nombre</string>
+
+    <string name="calcular">Calcular cuenta</string>
+
+    <string name="error_vacio">Falta introducir el valor de la cuenta.</string>
+    <string name="error_numero">Introduce un número válido.</string>
+    <string name="error_positivo">La cuenta debe ser mayor que cero.</string>
+    <string name="error_pago">Selecciona un método de pago.</string>
+
+    <string name="resultado">Cuenta: %1$.2f €\nPropina: %2$.2f €\nTotal: %3$.2f €\nPago: %4$s\nValoración: %5$.1f estrellas\nCamarero: %6$s</string>
+
+</resources>

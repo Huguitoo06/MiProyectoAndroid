@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/precio"/>
+
+        <EditText
+            android:id="@+id/importe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/introducir_importe"
+            android:inputType="numberDecimal"/>
+
+        <CheckBox
+            android:id="@+id/checkPropina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incluir_propina"/>
+
+        <TextView
+            android:id="@+id/textPorcentaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/propina_inicial"/>
+
+        <SeekBar
+            android:id="@+id/seekPropina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="30"
+            android:progress="10"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/metodo_pago"
+            android:textStyle="bold"/>
+
+        <RadioGroup
+            android:id="@+id/grupoPago"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/efectivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/efectivo"/>
+
+            <RadioButton
+                android:id="@+id/tarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tarjeta"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calificacion"
+            android:textStyle="bold"/>
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="3"
+            android:stepSize="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/camarero"
+            android:textStyle="bold"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/camarero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nombre_camarero"
+            android:completionThreshold="3"/>
+
+        <Button
+            android:id="@+id/botonCalcular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calcular"/>
+
+        <TextView
+            android:id="@+id/resultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

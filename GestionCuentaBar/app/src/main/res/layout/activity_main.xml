@@ -1,119 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Permite desplazarse por la pantalla -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F2FA"
+    android:fillViewport="true">
 
+    <!-- Contenedor principal -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp">
 
+        <!-- BOTONES PARA CAMBIAR EL IDIOMA -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:id="@+id/botonEspanol"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="@string/idioma_es"
+                android:textSize="14sp"
+                android:layout_marginEnd="5dp" />
+
+            <Button
+                android:id="@+id/botonIngles"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:text="@string/idioma_en"
+                android:textSize="14sp"
+                android:layout_marginStart="5dp" />
+
+        </LinearLayout>
+
+        <!-- Título principal -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/titulo"
-            android:textSize="26sp"
+            android:textSize="28sp"
             android:textStyle="bold"
+            android:textColor="#514078"
             android:gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="15dp"/>
 
+        <!-- Subtítulo -->
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/precio"/>
-
-        <EditText
-            android:id="@+id/importe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/introducir_importe"
-            android:inputType="numberDecimal"/>
+            android:text="@string/subtitulo"
+            android:textSize="14sp"
+            android:textColor="#77717F"
+            android:gravity="center"
+            android:layout_marginBottom="25dp"/>
 
-        <CheckBox
-            android:id="@+id/checkPropina"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/incluir_propina"/>
-
-        <TextView
-            android:id="@+id/textPorcentaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/propina_inicial"/>
-
-        <SeekBar
-            android:id="@+id/seekPropina"
+        <!-- TARJETA DEL PRECIO -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="30"
-            android:progress="10"/>
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/fondo_tarjeta">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/metodo_pago"
-            android:textStyle="bold"/>
-
-        <RadioGroup
-            android:id="@+id/grupoPago"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/efectivo"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/efectivo"/>
+                android:text="@string/precio"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#514078"/>
 
-            <RadioButton
-                android:id="@+id/tarjeta"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/importe"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tarjeta"/>
+                android:hint="@string/introducir_importe"
+                android:inputType="numberDecimal"
+                android:textSize="16sp"/>
 
-        </RadioGroup>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/calificacion"
-            android:textStyle="bold"/>
-
-        <RatingBar
-            android:id="@+id/rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="3"
-            android:stepSize="1"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/camarero"
-            android:textStyle="bold"/>
-
-        <AutoCompleteTextView
-            android:id="@+id/camarero"
+        <!-- TARJETA DE LA PROPINA -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nombre_camarero"
-            android:completionThreshold="3"/>
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/fondo_tarjeta">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/propina_titulo"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#514078"/>
+
+            <CheckBox
+                android:id="@+id/checkPropina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/incluir_propina"
+                android:buttonTint="#7054A5"/>
+
+            <TextView
+                android:id="@+id/textPorcentaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/propina_inicial"
+                android:textColor="#514078"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
+
+            <SeekBar
+                android:id="@+id/seekPropina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="30"
+                android:progress="10"
+                android:progressTint="#7054A5"
+                android:thumbTint="#7054A5"/>
+
+        </LinearLayout>
+
+        <!-- TARJETA DEL MÉTODO DE PAGO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/fondo_tarjeta">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/metodo_pago"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#514078"/>
+
+            <RadioGroup
+                android:id="@+id/grupoPago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/efectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/efectivo"
+                    android:buttonTint="#7054A5"/>
+
+                <RadioButton
+                    android:id="@+id/tarjeta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tarjeta"
+                    android:buttonTint="#7054A5"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <!-- TARJETA DE VALORACIÓN Y CAMARERO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/fondo_tarjeta">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calificacion"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#514078"/>
+
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1"
+                android:progressTint="#7054A5"
+                android:secondaryProgressTint="#D9D2E5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/camarero"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#514078"
+                android:layout_marginTop="15dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/camarero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nombre_camarero"
+                android:completionThreshold="3"
+                android:inputType="textCapWords"/>
+
+        </LinearLayout>
+
+        <!-- BOTÓN PARA CALCULAR LA CUENTA -->
         <Button
             android:id="@+id/botonCalcular"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/calcular"/>
+            android:layout_height="55dp"
+            android:text="@string/calcular"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:background="@drawable/fondo_boton"
+            android:layout_marginTop="20dp"/>
 
+        <!-- RESULTADO -->
         <TextView
             android:id="@+id/resultado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:padding="10dp"
-            android:layout_marginTop="15dp"/>
+            android:textSize="16sp"
+            android:textColor="#514078"
+            android:padding="18dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/fondo_tarjeta"/>
 
     </LinearLayout>
 

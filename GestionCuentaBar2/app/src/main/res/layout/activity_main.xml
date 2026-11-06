@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <!-- Botones para cambiar el idioma -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/botonEspanol"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:text="ES"
+                android:textColor="#172554"
+                android:backgroundTint="#E0F2FE" />
+
+            <Button
+                android:id="@+id/botonIngles"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:text="EN"
+                android:textColor="#172554"
+                android:backgroundTint="#E0F2FE"
+                android:layout_marginStart="8dp" />
+
+        </LinearLayout>
+
+        <!-- Título principal -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#172554"
+            android:gravity="center"
+            android:paddingTop="15dp" />
+
+        <!-- Descripción -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/subtitulo"
+            android:textSize="15sp"
+            android:textColor="#64748B"
+            android:gravity="center"
+            android:paddingBottom="22dp" />
+
+        <!-- TARJETA 1: Importe de la cuenta -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:elevation="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/precio"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#172554" />
+
+            <!-- Campo para introducir el precio -->
+            <EditText
+                android:id="@+id/importe"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="@string/introducir_importe"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:padding="12dp"
+                android:layout_marginTop="8dp"
+                android:textColor="#172554"
+                android:textColorHint="#94A3B8" />
+
+        </LinearLayout>
+
+        <!-- TARJETA 2: Configuración de la propina -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:elevation="5dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/propina_titulo"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#172554" />
+
+            <!-- Activar o desactivar la propina -->
+            <CheckBox
+                android:id="@+id/checkPropina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/incluir_propina"
+                android:checked="true"
+                android:textSize="15sp"
+                android:textColor="#334155"
+                android:buttonTint="#2563EB" />
+
+            <!-- Porcentaje seleccionado -->
+            <TextView
+                android:id="@+id/textPorcentaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/propina_inicial"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#0891B2"
+                android:paddingTop="8dp" />
+
+            <!-- Barra para elegir entre 0 y 30% -->
+            <SeekBar
+                android:id="@+id/seekPropina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="30"
+                android:progress="10"
+                android:progressTint="#06B6D4"
+                android:thumbTint="#2563EB" />
+
+        </LinearLayout>
+
+        <!-- TARJETA 3: Método de pago -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:elevation="5dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/metodo_pago"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#172554" />
+
+            <!-- Elegir efectivo o tarjeta -->
+            <RadioGroup
+                android:id="@+id/grupoPago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp">
+
+                <RadioButton
+                    android:id="@+id/efectivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/efectivo"
+                    android:textColor="#334155"
+                    android:buttonTint="#2563EB" />
+
+                <RadioButton
+                    android:id="@+id/tarjeta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tarjeta"
+                    android:textColor="#334155"
+                    android:buttonTint="#2563EB"
+                    android:layout_marginStart="25dp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <!-- TARJETA 4: Valoración y camarero -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:elevation="5dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/calificacion"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#172554" />
+
+            <!-- Valoración del servicio con estrellas -->
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:rating="3"
+                android:progressTint="#06B6D4"
+                android:secondaryProgressTint="#BAE6FD" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/camarero"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#172554"
+                android:paddingTop="15dp" />
+
+            <!-- Nombre del camarero con sugerencias -->
+            <AutoCompleteTextView
+                android:id="@+id/camarero"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="@string/nombre_camarero"
+                android:inputType="textCapWords"
+                android:completionThreshold="3"
+                android:padding="12dp"
+                android:textColor="#172554"
+                android:textColorHint="#94A3B8" />
+
+        </LinearLayout>
+
+        <!-- Botón principal para calcular la cuenta -->
+        <Button
+            android:id="@+id/botonCalcular"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="@string/calcular"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2563EB"
+            android:elevation="4dp"
+            android:layout_marginTop="22dp" />
+
+        <!-- Tarjeta donde aparecen los resultados o errores -->
+        <TextView
+            android:id="@+id/resultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="#172554"
+            android:background="@drawable/fondo_resultado"
+            android:elevation="4dp"
+            android:padding="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="20dp" />
+
+    </LinearLayout>
+
+</ScrollView>

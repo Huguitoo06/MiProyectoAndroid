@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bar Bill</string>
+
+    <!-- Title and description -->
+    <string name="titulo">Bar Bill</string>
+    <string name="subtitulo">Calculate your bill more easily</string>
+
+    <!-- Languages -->
+    <string name="idioma_es">Spanish</string>
+    <string name="idioma_en">English</string>
+
+    <!-- Bill amount -->
+    <string name="precio">Bill amount:</string>
+    <string name="introducir_importe">Enter the amount</string>
+
+    <!-- Tip section -->
+    <string name="propina_titulo">Tip</string>
+    <string name="incluir_propina">Include tip</string>
+    <string name="propina_inicial">Tip: 10%</string>
+    <string name="propina_porcentaje">Tip: %1$d%%</string>
+
+    <!-- Payment methods -->
+    <string name="metodo_pago">Payment method:</string>
+    <string name="efectivo">Cash</string>
+    <string name="tarjeta">Card</string>
+
+    <!-- Service rating -->
+    <string name="calificacion">Service rating:</string>
+
+    <!-- Waiter information -->
+    <string name="camarero">Waiter name:</string>
+    <string name="nombre_camarero">Enter the name</string>
+
+    <!-- Calculate button -->
+    <string name="calcular">Calculate bill</string>
+
+    <!-- Error messages -->
+    <string name="error_vacio">Please enter the bill amount.</string>
+    <string name="error_numero">Enter a valid number.</string>
+    <string name="error_positivo">The bill amount must be greater than zero.</string>
+    <string name="error_pago">Please select a payment method.</string>
+
+    <!-- Final bill result -->
+    <string name="resultado">Bill: %1$.2f €\nTip: %2$.2f €\nTotal: %3$.2f €\nPayment: %4$s\nRating: %5$.1f stars\nWaiter: %6$s</string>
+
+</resources>
